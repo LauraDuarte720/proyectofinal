@@ -46,20 +46,24 @@ public class App2 {
 
     private static void inicializarDatos() {
         // Datos iniciales de ejemplo
-        Administrador administrador1 = new Administrador("Juan", "Pérez", "1234567890", "juan.perez@mail.com", "juan123", "1234", "respuesta1");
-    
-    // Añadir administrador1 a la lista de administradores
-        administradores.add(administrador1);
-        
-    // Datos iniciales de ejemplo
-        empleados.add(new Empleado("Luis", "Martínez", "1112223334", "luis.martinez@mail.com", "luis001", "456", "respuestaA", administrador1));
-    
-        
-        // Vehículos de ejemplo
-        vehiculos.add(new Moto( "MOTO001", "Yamaha", "MT-07", true, 6, 200.0, 689.0, Transmision.MANUAL, Combustible.GASOLINA));
-        vehiculos.add(new Moto("MOTO002", "Kawasaki", "Ninja 400", false, 6, 190.0, 399.0, Transmision.MANUAL, Combustible.GASOLINA));
-    }
+        Administrador administrador1 = new Administrador("Juan",
+                 "Pérez", "1234567890", "juan.perez@mail.com",
+                "juan123", "1234", "respuesta1");
 
+        // Añadir administrador1 a la lista de administradores
+        administradores.add(administrador1);
+
+        // Datos iniciales de ejemplo
+        empleados.add(new Empleado("Luis", "Martínez", "1112223334", "luis.martinez@mail.com", 
+            "luis001", "456",
+                "respuestaA", administrador1));
+
+        // Vehículos de ejemplo
+        vehiculos.add(new Moto("MOTO001", "Yamaha", "MT-07", true, 6, 200.0, 689.0, Transmision.MANUAL,
+                Combustible.GASOLINA));
+        vehiculos.add(new Moto("MOTO002", "Kawasaki", "Ninja 400", false, 6, 190.0, 399.0, Transmision.MANUAL,
+                Combustible.GASOLINA));
+    }
 
     private static void loginEmpleado(Scanner scanner) {
         System.out.print("Ingrese su username: ");
@@ -127,8 +131,7 @@ public class App2 {
         while (!salir) {
             System.out.println("=== Menú de Administrador ===");
             System.out.println("1. Ver vehículos disponibles");
-            System.out.println("2. Registrar transacción");
-            System.out.println("3. Agregar nuevo vehículo");
+            System.out.println("2. Agregar nuevo vehículo");
             System.out.println("0. Cerrar sesión");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
@@ -154,6 +157,7 @@ public class App2 {
         System.out.println("=== Lista de Vehículos Disponibles ===");
         for (Vehiculo vehiculo : vehiculos) {
             System.out.println(vehiculo.toString());
+            System.out.println("\n");
         }
     }
 
@@ -182,8 +186,10 @@ public class App2 {
         System.out.print("Ingrese la edad del cliente: ");
         int edadCliente = scanner.nextInt();
 
-        //public Cliente(String nombres, String apellidos, String cedula, String correo, String telefono, int edad) 
-        Cliente cliente = new Cliente(nombreCliente,apellidoCliente, cedulaCliente,correoCliente, telefonoCliente, edadCliente);
+        // public Cliente(String nombres, String apellidos, String cedula, String
+        // correo, String telefono, int edad)
+        Cliente cliente = new Cliente(nombreCliente, apellidoCliente, cedulaCliente, correoCliente, telefonoCliente,
+                edadCliente);
         clientes.add(cliente);
 
         // Seleccionar vehículo
@@ -212,12 +218,14 @@ public class App2 {
                 transaccion = new Alquiler(cliente, vehiculoSeleccionado, empleado, fecha);
                 break;
             default:
-                JOptionPane.showMessageDialog(null, "Tipo de transacción no válido", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Tipo de transacción no válido", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
         }
 
         transacciones.add(transaccion);
-        JOptionPane.showMessageDialog(null, "Transacción registrada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Transacción registrada con éxito", "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
         System.out.println(transaccion.toString());
     }
 
@@ -258,56 +266,58 @@ public class App2 {
         scanner.nextLine(); // Limpiar buffer
         Transmision transmision;
         try {
-            transmision = Transmision.valueOf(input);  // Convierte la entrada al ENUM
+            transmision = Transmision.valueOf(input); // Convierte la entrada al ENUM
         } catch (IllegalArgumentException e) {
             System.out.println("Valor inválido. Se asignará el valor por defecto: MANUAL.");
-            transmision = Transmision.MANUAL;  // Valor por defecto si la entrada es inválida
+            transmision = Transmision.MANUAL; // Valor por defecto si la entrada es inválida
         }
         System.out.print("¿El vehículo que tipo de combustion tiene? (GASOLINA/DIESEL/ELECTRICO/HIBRIDO");
         String input2 = scanner.next().toUpperCase();
         scanner.nextLine(); // Limpiar buffer
         Combustible combustible;
         try {
-            combustible = Combustible.valueOf(input2);  // Convierte la entrada al ENUM
+            combustible = Combustible.valueOf(input2); // Convierte la entrada al ENUM
         } catch (IllegalArgumentException e) {
             System.out.println("Valor inválido. Se asignará el valor por defecto: GASOLINA.");
-            combustible = Combustible.GASOLINA;  // Valor por defecto si la entrada es inválida
+            combustible = Combustible.GASOLINA; // Valor por defecto si la entrada es inválida
         }
 
         Vehiculo nuevoVehiculo = null;
         switch (tipoVehiculo) {
             case 1:
-                nuevoVehiculo = new Moto(codigo,marca, modelo,esNuevo, cambios, velocidadMax, cilindraje, transmision, combustible);
+                nuevoVehiculo = new Moto(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, transmision,
+                        combustible);
                 break;
             case 2:
 
-            System.out.print("Ingrese el número de pasajeros: ");
-            int numeroPasajeros = scanner.nextInt();
-            System.out.print("Ingrese el número de puertas: ");
-            int numeroPuertas = scanner.nextInt();
-            System.out.print("Ingrese el número de bolsas de aire: ");
-            int numeroBolsasAire = scanner.nextInt();
-            System.out.print("¿El vehículo tiene aire acondicionado? (true/false): ");
-            boolean aireAcondicionado = scanner.nextBoolean();
-            System.out.print("¿El vehículo tiene ABS? (true/false): ");
-            boolean abs = scanner.nextBoolean();
-            System.out.print("¿El vehículo tiene cámara reversa? (true/false): ");
-            boolean camaraReversa = scanner.nextBoolean();
-            System.out.print("¿El vehículo tiene sensor de colisión? (true/false): ");
-            boolean sensorColision = scanner.nextBoolean();
-            System.out.print("¿El vehículo tiene sensor de tráfico? (true/false): ");
-            boolean sensorTrafico = scanner.nextBoolean();
-            System.out.print("¿El vehículo tiene asistente de permanencia en carril? (true/false): ");
-            boolean asistentePermanenciaCarril = scanner.nextBoolean();
-            System.out.print("¿El vehículo tiene velocidad crucero? (true/false): ");
-            boolean velocidadCrucero = scanner.nextBoolean();
-            System.out.print("Ingrese la capacidad de carga: ");
-            double capacidadCarga = scanner.nextDouble();
+                System.out.print("Ingrese el número de pasajeros: ");
+                int numeroPasajeros = scanner.nextInt();
+                System.out.print("Ingrese el número de puertas: ");
+                int numeroPuertas = scanner.nextInt();
+                System.out.print("Ingrese el número de bolsas de aire: ");
+                int numeroBolsasAire = scanner.nextInt();
+                System.out.print("¿El vehículo tiene aire acondicionado? (true/false): ");
+                boolean aireAcondicionado = scanner.nextBoolean();
+                System.out.print("¿El vehículo tiene ABS? (true/false): ");
+                boolean abs = scanner.nextBoolean();
+                System.out.print("¿El vehículo tiene cámara reversa? (true/false): ");
+                boolean camaraReversa = scanner.nextBoolean();
+                System.out.print("¿El vehículo tiene sensor de colisión? (true/false): ");
+                boolean sensorColision = scanner.nextBoolean();
+                System.out.print("¿El vehículo tiene sensor de tráfico? (true/false): ");
+                boolean sensorTrafico = scanner.nextBoolean();
+                System.out.print("¿El vehículo tiene asistente de permanencia en carril? (true/false): ");
+                boolean asistentePermanenciaCarril = scanner.nextBoolean();
+                System.out.print("¿El vehículo tiene velocidad crucero? (true/false): ");
+                boolean velocidadCrucero = scanner.nextBoolean();
+                System.out.print("Ingrese la capacidad de carga: ");
+                double capacidadCarga = scanner.nextDouble();
 
-            // Crear un nuevo objeto Sedan con los datos proporcionados
-            nuevoVehiculo = new Sedan(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, transmision, combustible,
-                    numeroPasajeros, numeroPuertas, numeroBolsasAire, aireAcondicionado, abs, camaraReversa,
-                    sensorColision, sensorTrafico, asistentePermanenciaCarril, velocidadCrucero, capacidadCarga);
+                // Crear un nuevo objeto Sedan con los datos proporcionados
+                nuevoVehiculo = new Sedan(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje,
+                        transmision, combustible,
+                        numeroPasajeros, numeroPuertas, numeroBolsasAire, aireAcondicionado, abs, camaraReversa,
+                        sensorColision, sensorTrafico, asistentePermanenciaCarril, velocidadCrucero, capacidadCarga);
 
                 break;
             case 3:
@@ -322,9 +332,11 @@ public class App2 {
                 System.out.print("Ingrese el número de bolsas de aire: ");
                 int numeroBolsasAireDeportivo = scanner.nextInt();
 
-            // Crear un nuevo objeto Deportivo con los parámetros especificados
-            nuevoVehiculo = new Deportivo(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, transmision, combustible,
-                    numeroPasajerosDeportivo, numeroPuertasDeportivo, numeroBolsasAireDeportivo, caballosFuerza, tiempoCien);
+                // Crear un nuevo objeto Deportivo con los parámetros especificados
+                nuevoVehiculo = new Deportivo(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje,
+                        transmision, combustible,
+                        numeroPasajerosDeportivo, numeroPuertasDeportivo, numeroBolsasAireDeportivo, caballosFuerza,
+                        tiempoCien);
                 break;
             case 4:
                 System.out.print("Ingrese el número de pasajeros: ");
@@ -352,59 +364,63 @@ public class App2 {
                 System.out.print("¿La camioneta es 4x4? (true/false): ");
                 boolean cuatroxcuatro = scanner.nextBoolean();
 
-                nuevoVehiculo = new Camioneta(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, transmision, combustible,
-                    numeroPasajerosCamioneta, numeroPuertasCamioneta, numeroBolsasAireCamioneta, aireAcondicionadoCamioneta, absCamioneta, camaraReversaCamioneta,
-                    sensorColisionCamioneta, sensorTraficoCamioneta, asistentePermanenciaCarrilCamioneta, velocidadCruceroCamioneta, capacidadCargaCamioneta, cuatroxcuatro);
+                nuevoVehiculo = new Camioneta(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje,
+                        transmision, combustible,
+                        numeroPasajerosCamioneta, numeroPuertasCamioneta, numeroBolsasAireCamioneta,
+                        aireAcondicionadoCamioneta, absCamioneta, camaraReversaCamioneta,
+                        sensorColisionCamioneta, sensorTraficoCamioneta, asistentePermanenciaCarrilCamioneta,
+                        velocidadCruceroCamioneta, capacidadCargaCamioneta, cuatroxcuatro);
                 break;
             case 5:
-                //nuevoVehiculo = new Pickup(codigo,marca, modelo,esNuevo, cambios, velocidadMax, cilindraje, transmision, combustible);
+                // nuevoVehiculo = new Pickup(codigo,marca, modelo,esNuevo, cambios,
+                // velocidadMax, cilindraje, transmision, combustible);
                 break;
             case 6:
                 System.out.print("Ingrese la autonomía (en km): ");
                 double autonomia = scanner.nextDouble();
                 System.out.print("Ingrese el tiempo de carga (en horas): ");
                 double tiempoCarga = scanner.nextDouble();
-        
-                nuevoVehiculo = new Electrico(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, 
-                                          transmision, combustible, autonomia, tiempoCarga);
+
+                nuevoVehiculo = new Electrico(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje,
+                        transmision, combustible, autonomia, tiempoCarga);
                 break;
-                
+
             case 7:
                 System.out.print("¿El vehículo es enchufable? (true/false): ");
                 boolean enchufable = scanner.nextBoolean();
                 System.out.print("¿El vehículo es ligero? (true/false): ");
                 boolean ligero = scanner.nextBoolean();
-    
-                nuevoVehiculo = new Hibrido(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, 
-                                        transmision, combustible, enchufable, ligero);
+
+                nuevoVehiculo = new Hibrido(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje,
+                        transmision, combustible, enchufable, ligero);
                 break;
             case 8:
                 System.out.print("Ingrese el número de pasajeros: ");
                 int numeroPasajerosVan = scanner.nextInt();
-        
+
                 System.out.print("Ingrese el número de puertas: ");
                 int numeroPuertasVan = scanner.nextInt();
-        
+
                 System.out.print("Ingrese el número de bolsas de aire: ");
                 int numeroBolsasAireVan = scanner.nextInt();
-        
+
                 System.out.print("¿Tiene aire acondicionado? (true/false): ");
                 boolean aireAcondicionadoVan = scanner.nextBoolean();
-        
+
                 System.out.print("¿Tiene sistema ABS? (true/false): ");
                 boolean absVan = scanner.nextBoolean();
-        
+
                 System.out.print("¿Tiene cámara reversa? (true/false): ");
                 boolean camaraReversaVan = scanner.nextBoolean();
-        
+
                 System.out.print("Ingrese la capacidad del maletero (en litros): ");
                 double capacidadMaletero = scanner.nextDouble();
-        
-                nuevoVehiculo = new Van(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, 
-                                             transmision, combustible, numeroPasajerosVan, numeroPuertasVan, 
-                                             numeroBolsasAireVan, aireAcondicionadoVan, absVan, camaraReversaVan, capacidadMaletero);
-        
-            // Agregar el vehículo a la lista de vehículos
+
+                nuevoVehiculo = new Van(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje,
+                        transmision, combustible, numeroPasajerosVan, numeroPuertasVan,
+                        numeroBolsasAireVan, aireAcondicionadoVan, absVan, camaraReversaVan, capacidadMaletero);
+
+                // Agregar el vehículo a la lista de vehículos
                 break;
             case 9:
                 System.out.print("Ingrese la capacidad de carga: ");
@@ -420,8 +436,10 @@ public class App2 {
                 System.out.print("Ingrese el tipo de camión (liviano/pesado): ");
                 String tipoCamionStr = scanner.nextLine();
 
-                nuevoVehiculo = new Camion(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, transmision,combustible,
-                    capacidadCargaCamion, aireAcondicionadoCamion, frenosAire, absCamion, numeroEjesCamion, TipoCamion.valueOf(tipoCamionStr.toUpperCase()));
+                nuevoVehiculo = new Camion(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje,
+                        transmision, combustible,
+                        capacidadCargaCamion, aireAcondicionadoCamion, frenosAire, absCamion, numeroEjesCamion,
+                        TipoCamion.valueOf(tipoCamionStr.toUpperCase()));
                 break;
             case 10:
                 System.out.print("Ingrese el número de pasajeros: ");
@@ -443,10 +461,11 @@ public class App2 {
                 System.out.print("Ingrese la capacidad del maletero: ");
                 double capacidadMaleteroBus = scanner.nextDouble();
 
-            
-                nuevoVehiculo = new Bus(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, transmision, combustible,
-                    numeroPasajerosBus, numeroPuertasBus, numeroBolsasAireBus, aireAcondicionadoBus, absBus, camaraReversaBus, numeroEjesBus,
-                    numeroSalidasEmergencia, capacidadMaleteroBus);
+                nuevoVehiculo = new Bus(codigo, marca, modelo, esNuevo, cambios, velocidadMax, cilindraje, transmision,
+                        combustible,
+                        numeroPasajerosBus, numeroPuertasBus, numeroBolsasAireBus, aireAcondicionadoBus, absBus,
+                        camaraReversaBus, numeroEjesBus,
+                        numeroSalidasEmergencia, capacidadMaleteroBus);
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Tipo de vehículo no válido", "Error", JOptionPane.ERROR_MESSAGE);
